@@ -1,7 +1,36 @@
 <resources>
     <string name="app_name">Assistant Rainbow Six | Siege</string>
-    <string name="Operateurs">Opérateurs</string>
+    <string name="Operateurs">Operateurs</string>
     <string name="logoassist">logoAssist</string>
     <string name="Armes">Armes</string>
     <string name="Cartes">Cartes</string>
+    <string name="title_activity_operators">Opérateurs</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="op_type">Par type</string>
+    <string name="op_ctu">Par CTU</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="opsIcon">Icône d\'opérateur</string>
+    <string name="ash">Ash</string>
+    <string name="attaquant">Attaquants</string>
+
+    <string-array name="att_array">
+        <item>Ash</item>
+        <item>Thermite</item>
+        <item>Fuze</item>
+        <item>Glaz</item>
+        <item>Thatcher</item>
+        <item>Sledge</item>
+    </string-array>
+
+    <string-array name="def_array">
+        <item>Pulse</item>
+        <item>Castle</item>
+        <item>Kapkan</item>
+        <item>Tachanka</item>
+        <item>Mute</item>
+        <item>Smoke</item>
+    </string-array>
 </resources>
