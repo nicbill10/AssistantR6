@@ -23,6 +23,7 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:colorBackground">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/bebas</item>
     </style>
 
 </resources>
