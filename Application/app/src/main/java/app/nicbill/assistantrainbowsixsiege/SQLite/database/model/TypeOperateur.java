@@ -6,16 +6,14 @@ public class TypeOperateur {
     public static final String TABLE_NAME = "typeOperateur";
 
     public static final String COLUMN_IDTYPEOP = "idTypeOp";
-    public static final String COLUMN_NOMCAP = "nomCap";
-    public static final String COLUMN_DESCCAP = "descCap";
-    public static final String COLUMN_CHEMINIMAGECAP = "cheminImageCap";
-    public static final String COLUMN_IDOPERATEUR = "idOperateur";
+    public static final String COLUMN_TYPE = "type";
+    public static final String COLUMN_VITESSE = "vitesse";
+    public static final String COLUMN_ARMURE = "armure";
 
-    private int idCap;
-    private String nomCap;
-    private String descCap;
-    private String cheminImageCap;
-    private int idOperateur;
+    private int idTypeOp;
+    private String type;
+    private String vitesse;
+    private String armure;
 
 
 
@@ -23,49 +21,41 @@ public class TypeOperateur {
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + COLUMN_IDTYPEOP + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_NOMCAP + " TEXT,"
-                    + COLUMN_DESCCAP + " TEXT,"
-                    + COLUMN_CHEMINIMAGECAP + " TEXT,"
-                    + COLUMN_IDOPERATEUR + " INTEGER"
+                    + COLUMN_TYPE + " TEXT,"
+                    + COLUMN_VITESSE + " TEXT,"
+                    + COLUMN_ARMURE + " TEXT"
                     + ")";
 
-    public TypeOperateur(int idCap, String nomCap, String descCap, String cheminImageCap, int idOperateur) {
-        this.idCap = idCap;
-        this.nomCap = nomCap;
-        this.descCap = descCap;
-        this.cheminImageCap = cheminImageCap;
-        this.idOperateur = idOperateur;
+    public TypeOperateur(int idTypeOp, String type, String vitesse, String armure) {
+        this.idTypeOp = idTypeOp;
+        this.type = type;
+        this.vitesse = vitesse;
+        this.armure = armure;
     }
 
-    public int getIdCap(){
-        return idCap;
+    public int getIdTypeOp(){
+        return idTypeOp;
     }
 
-    public String getNomCap(){
-        return nomCap;
+    public String getType(){
+        return type;
     }
-    public void setNomCap(String nomCap){
-        this.nomCap = nomCap;
-    }
-
-    public String getDescCap(){
-        return descCap;
-    }
-    public void setDescCap(String descCap){
-        this.descCap = descCap;
+    public void setType(String type){
+        this.type = type;
     }
 
-    public String getCheminImageCap(){
-        return cheminImageCap;
+    public String getVitesse(){
+        return vitesse;
     }
-    public void setCheminImageCap(String cheminImageCap){
-        this.cheminImageCap = cheminImageCap;
+    public void setVitesse(String vitesse){
+        this.vitesse = vitesse;
     }
 
-    public int getIdOperateur(){
-        return idOperateur;
+    public String getArmure(){
+        return armure;
     }
-    public void setIdOperateur(int idOperateur){
-        this.idOperateur = idOperateur;
+    public void setArmure(String armure){
+        this.armure = armure;
     }
+
 }
