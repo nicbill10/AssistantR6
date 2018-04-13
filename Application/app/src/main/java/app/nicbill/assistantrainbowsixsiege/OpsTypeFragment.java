@@ -1,6 +1,8 @@
 package app.nicbill.assistantrainbowsixsiege;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,12 +14,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
+
 public class OpsTypeFragment extends Fragment {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    DBHelper dbHelper;
+    SQLiteDatabase SQLITEDATABASE;
+    Cursor cursor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,21 +49,11 @@ public class OpsTypeFragment extends Fragment {
     private void prepareListData() {
         listDataHeader = new ArrayList<>();
         listDataChild = new HashMap<>();
-
+        List<String> attList = new ArrayList<>();
         // Adding child data
+
         listDataHeader.add("Attaquants");
         listDataHeader.add("Défenseurs");
-
-
-        // Adding child data
-        List<String> attList = new ArrayList<>();
-        attList.add("Ash");
-        attList.add("Thermite");
-        attList.add("Fuze");
-        attList.add("Glaz");
-        attList.add("Thatcher");
-        attList.add("Sledge");
-
 
         List<String> defList = new ArrayList<>();
         defList.add("Pulse");
@@ -67,8 +64,7 @@ public class OpsTypeFragment extends Fragment {
         defList.add("Smoke");
 
 
-        listDataChild.put(listDataHeader.get(0), attList); // Header, Child data
+        listDataChild.put(listDataHeader.get(0), attList);
         listDataChild.put(listDataHeader.get(1), defList);
     }
-
 }

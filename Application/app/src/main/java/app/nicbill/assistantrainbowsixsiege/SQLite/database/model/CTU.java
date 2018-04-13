@@ -4,29 +4,11 @@ public class CTU {
 
     public static final String TABLE_NAME = "ctu";
 
-    public static final String COLUMN_IDCTU = "idCTU";
-    public static final String COLUMN_NOMCTU = "nomCTU";
-    public static final String COLUMN_ABREVCTU = "abrevCTU";
-    public static final String COLUMN_LOCATIONCTU = "locationCTU";
-    public static final String COLUMN_DESCCTU = "descCTU";
-
     private int idCTU;
     private String nomCTU;
     private String abrevCTU;
     private String locationCTU;
     private String descCTU;
-
-
-
-    // Create table SQL query
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
-                    + COLUMN_IDCTU + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_NOMCTU + " TEXT,"
-                    + COLUMN_ABREVCTU + " TEXT,"
-                    + COLUMN_LOCATIONCTU + " TEXT,"
-                    + COLUMN_DESCCTU + " TEXT"
-                    + ")";
 
     public CTU(int idCTU, String nomCTU, String abrevCTU, String locationCTU, String descCTU) {
         this.idCTU = idCTU;

@@ -4,29 +4,11 @@ public class Capacite {
 
     public static final String TABLE_NAME = "capacite";
 
-    public static final String COLUMN_IDCAP = "idCap";
-    public static final String COLUMN_NOMCAP = "nomCap";
-    public static final String COLUMN_DESCCAP = "descCap";
-    public static final String COLUMN_CHEMINIMAGECAP = "cheminImageCap";
-    public static final String COLUMN_IDOPERATEUR = "idOperateur";
-
     private int idCap;
     private String nomCap;
     private String descCap;
     private String cheminImageCap;
     private int idOperateur;
-
-
-
-    // Create table SQL query
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
-                    + COLUMN_IDCAP + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_NOMCAP + " TEXT,"
-                    + COLUMN_DESCCAP + " TEXT,"
-                    + COLUMN_CHEMINIMAGECAP + " TEXT,"
-                    + COLUMN_IDOPERATEUR + " INT"
-                    + ")";
 
     public Capacite(int idCap, String nomCap, String descCap, String cheminImageCap, int idOperateur) {
         this.idCap = idCap;

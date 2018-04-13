@@ -5,28 +5,12 @@ public class TypeOperateur {
 
     public static final String TABLE_NAME = "typeOperateur";
 
-    public static final String COLUMN_IDTYPEOP = "idTypeOp";
-    public static final String COLUMN_TYPE = "type";
-    public static final String COLUMN_VITESSE = "vitesse";
-    public static final String COLUMN_ARMURE = "armure";
-
     private int idTypeOp;
     private String type;
-    private String vitesse;
-    private String armure;
+    private int vitesse;
+    private int armure;
 
-
-
-    // Create table SQL query
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
-                    + COLUMN_IDTYPEOP + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_TYPE + " TEXT,"
-                    + COLUMN_VITESSE + " TEXT,"
-                    + COLUMN_ARMURE + " TEXT"
-                    + ")";
-
-    public TypeOperateur(int idTypeOp, String type, String vitesse, String armure) {
+    public TypeOperateur(int idTypeOp, String type, int vitesse, int armure) {
         this.idTypeOp = idTypeOp;
         this.type = type;
         this.vitesse = vitesse;
@@ -44,17 +28,17 @@ public class TypeOperateur {
         this.type = type;
     }
 
-    public String getVitesse(){
+    public int getVitesse(){
         return vitesse;
     }
-    public void setVitesse(String vitesse){
+    public void setVitesse(int vitesse){
         this.vitesse = vitesse;
     }
 
-    public String getArmure(){
+    public int getArmure(){
         return armure;
     }
-    public void setArmure(String armure){
+    public void setArmure(int armure){
         this.armure = armure;
     }
 
