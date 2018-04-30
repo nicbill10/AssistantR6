@@ -1,8 +1,7 @@
 package app.nicbill.assistantrainbowsixsiege;
 
 import android.annotation.SuppressLint;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
+import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
 
 public class OpsTypeFragment extends Fragment {
 
@@ -22,9 +21,7 @@ public class OpsTypeFragment extends Fragment {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-    DBHelper dbHelper;
-    SQLiteDatabase SQLITEDATABASE;
-    Cursor cursor;
+    COperateurs cOperateurs = new COperateurs(this.getContext());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,10 +33,23 @@ public class OpsTypeFragment extends Fragment {
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
+
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                Intent i = new Intent(parent.getContext(),OpsInfosActivity.class);
+                i.putExtra("OP_NAME", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                startActivity(i);
+                return false;
+            }
+        });
         return v;
     }
 
@@ -49,22 +59,15 @@ public class OpsTypeFragment extends Fragment {
     private void prepareListData() {
         listDataHeader = new ArrayList<>();
         listDataChild = new HashMap<>();
-        List<String> attList = new ArrayList<>();
-        // Adding child data
+        List<String> attList = cOperateurs.getOpsListByType("Attaquant");
+        List<String> defList = cOperateurs.getOpsListByType("Défenseur");
 
         listDataHeader.add("Attaquants");
-        listDataHeader.add("Défenseurs");
-
-        List<String> defList = new ArrayList<>();
-        defList.add("Pulse");
-        defList.add("Castle");
-        defList.add("Kapkan");
-        defList.add("Tachanka");
-        defList.add("Mute");
-        defList.add("Smoke");
-
+        listDataHeader.add("Defenseurs");
 
         listDataChild.put(listDataHeader.get(0), attList);
         listDataChild.put(listDataHeader.get(1), defList);
     }
+
 }
+

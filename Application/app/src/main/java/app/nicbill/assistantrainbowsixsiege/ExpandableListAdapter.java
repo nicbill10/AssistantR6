@@ -2,12 +2,16 @@ package app.nicbill.assistantrainbowsixsiege;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import app.nicbill.assistantrainbowsixsiege.OpsTypeFragment;
@@ -15,12 +19,12 @@ import app.nicbill.assistantrainbowsixsiege.R;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private OpsTypeFragment _context;
+    private Activity _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 
-    public ExpandableListAdapter(OpsTypeFragment context, List<String> listDataHeader, HashMap<String, List<String>> listChildData) {
+    public ExpandableListAdapter(Activity context, List<String> listDataHeader, HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -42,14 +46,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater infalInflater = this._context.getLayoutInflater();
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert infalInflater != null;
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
         TextView txtListChild = convertView.findViewById(R.id.lbl_ops_list);
+        ImageView iconListChild = convertView.findViewById(R.id.icon_ops_list);
 
+        int imageID = _context.getResources().getIdentifier("drawable/icone_operateur_" + childText.toLowerCase() + "_min_tn", null, _context.getPackageName());
         txtListChild.setText(childText);
+        iconListChild.setImageResource(imageID);
         return convertView;
     }
 
@@ -77,12 +84,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
-            LayoutInflater infalInflater = this._context.getLayoutInflater();
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
 
         TextView lblListHeader = convertView.findViewById(R.id.lbl_type_ops);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
         return convertView;

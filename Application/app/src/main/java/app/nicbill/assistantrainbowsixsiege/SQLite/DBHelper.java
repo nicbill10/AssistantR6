@@ -1,10 +1,13 @@
 package app.nicbill.assistantrainbowsixsiege.SQLite;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,90 +16,100 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static String DB_NAME = "BD_R6.db";
-    private static String DB_PATH = "";
-    private static final int DB_VERSION = 1;
 
-    private SQLiteDatabase mDataBase;
+    protected static SQLiteDatabase mDatabase;
     private final Context mContext;
-    private boolean mNeedUpdate = false;
+    private static final String DATABASE_NAME = "BD_R6.db";
+    @SuppressLint("SdCardPath")
+    private static String DATABASE_PATH = "/data/data/app.nicbill.assistantrainbowsixsiege/databases/";
+    private static final int DATABASE_VERSION = 2;
 
-    public DBHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-        if (android.os.Build.VERSION.SDK_INT >= 19)
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        else
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+    public DBHelper(Context context){
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.mContext = context;
-
-        copyDataBase();
-
-        this.getReadableDatabase();
     }
 
-    public void updateDataBase() throws IOException {
-        if (mNeedUpdate) {
-            File dbFile = new File(DB_PATH + DB_NAME);
-            if (dbFile.exists())
-                dbFile.delete();
+    public void createDatabase() throws IOException{
+        Log.i("db_log","création de la BD");
+        boolean dbExist = checkDatabase();
 
-            copyDataBase();
-
-            mNeedUpdate = false;
+        if(dbExist){
+            Log.i("db_log", "db exists");
         }
-    }
+        else {
+            try{
+                getReadableDatabase();
+                close();
 
-    private boolean checkDataBase() {
-        File dbFile = new File(DB_PATH + DB_NAME);
-        return dbFile.exists();
-    }
-
-    private void copyDataBase() {
-        if (!checkDataBase()) {
-            this.getReadableDatabase();
-            this.close();
-            try {
-                copyDBFile();
-            } catch (IOException mIOException) {
-                throw new Error("ErrorCopyingDataBase");
+                copyDatabase();
+            }catch (IOException e){
+                throw new Error("Error copying database");
             }
         }
     }
 
-    private void copyDBFile() throws IOException {
-        InputStream mInput = mContext.getAssets().open(DB_NAME);
-        //InputStream mInput = mContext.getResources().openRawResource(R.raw.info);
-        OutputStream mOutput = new FileOutputStream(DB_PATH + DB_NAME);
-        byte[] mBuffer = new byte[1024];
-        int mLength;
-        while ((mLength = mInput.read(mBuffer)) > 0)
-            mOutput.write(mBuffer, 0, mLength);
-        mOutput.flush();
-        mOutput.close();
-        mInput.close();
+    private static boolean checkDatabase() {
+        boolean checkDB = false;
+        try {
+            String myPath = DATABASE_PATH + DATABASE_NAME;
+            File dbFile = new File(myPath);
+            checkDB = dbFile.exists();
+        } catch (SQLiteException e) {
+            Log.v("db_log", e.getMessage());
+        }
+        return checkDB;
     }
 
-    public boolean openDataBase() throws SQLException {
-        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-        return mDataBase != null;
+    private void copyDatabase() throws IOException{
+        InputStream myInput = mContext.getAssets().open(DATABASE_NAME);
+        String outFileName = DATABASE_PATH + DATABASE_NAME;
+        OutputStream myOutput = new FileOutputStream(outFileName);
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer)) > 0)
+        {
+            myOutput.write(buffer, 0, length);
+            Log.i("db_log", "copyDatabase");
+        }
+        myOutput.flush();
+        myInput.close();
+        myOutput.close();
+        Log.i("db_log","copyDatabase() terminé");
     }
 
-    @Override
-    public synchronized void close() {
-        if (mDataBase != null)
-            mDataBase.close();
+    public void db_delete(){
+        File file = new File(DATABASE_PATH + DATABASE_NAME);
+        if(file.exists()){
+            file.delete();
+        }
+    }
+
+    public void openDatabase() throws SQLException{
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            throw new Error("Impossible de créer la BD");
+        }
+        String myPath = DATABASE_PATH + DATABASE_NAME;
+        mDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+    }
+
+    public synchronized void closeDataBase() throws SQLException{
+        if(mDatabase != null)
+            mDatabase.close();
         super.close();
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db) {   }
 
-    }
-
+    //TODO faire le onUprade pour vrai
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (newVersion > oldVersion)
-            mNeedUpdate = true;
+        if(newVersion > oldVersion){
+            Log.v("Database Upgrade", "Database version higher than old.");
+            db_delete();
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package app.nicbill.assistantrainbowsixsiege;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,7 +16,7 @@ import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
 public class MainMenuActivity extends AppCompatActivity {
 
     public Button btnOps;
-    private DBHelper mDBHelper;
+    DBHelper mDBHelper;
     private SQLiteDatabase mDb;
 
     @Override
@@ -23,19 +24,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        mDBHelper = new DBHelper(this);
-
-        try {
-            mDBHelper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-
-        try {
-            mDb = mDBHelper.getWritableDatabase();
-        } catch (SQLException mSQLException) {
-            throw mSQLException;
-        }
+        chargerBD();
 
         btnOps = findViewById(R.id.btnOperateurs);
 
@@ -46,5 +35,10 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void chargerBD(){
+        mDBHelper = new DBHelper(this);
+        mDBHelper.openDatabase();
     }
 }

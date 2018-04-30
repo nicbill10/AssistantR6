@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:context="app.nicbill.assistantrainbowsixsiege.OpsInfosActivity">
+
+
+        <ImageView
+            android:id="@+id/icon_ops_info"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_alignEnd="@+id/textView9"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icone_operateur_sledge"
+            tools:layout_editor_absoluteX="59dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <TextView
+            android:id="@+id/nomCodeOp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageOperateur"
+            android:layout_marginBottom="0dp"
+            android:text="Sledge"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/imageOperateur"
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/nomReelOperateur"
+            android:contentDescription="@string/imageOpDesc"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/image_operateur_sledge" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_below="@+id/yellowBar1"
+            android:layout_marginTop="12dp"
+            android:text="@string/info_nom_complet"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/nomReelOperateur"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="7dp"
+            android:text="@string/info_date_de_naissance"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_below="@+id/abrevCtuOp"
+            android:text="@string/info_biographie"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignStart="@+id/ctuBtn"
+            android:layout_marginStart="36dp"
+            android:text="@string/info_ctu"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/nomReelOperateur"
+            android:layout_width="175dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_below="@+id/textView5"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Seamus Cowden"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,RtlCompat" />
+
+        <TextView
+            android:id="@+id/ddn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/nomReelOperateur"
+            android:layout_below="@+id/textView7"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="1982/04/02"
+            android:textColor="@color/colorAccent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/abrevCtuOp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/ctuBtn"
+            android:layout_alignStart="@+id/ctuBtn"
+            android:layout_below="@+id/ctuBtn"
+            android:fontFamily="sans-serif-condensed"
+            android:text="SAS"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/bioOp"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_alignStart="@+id/ddn"
+            android:layout_below="@+id/textView8"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:fontFamily="sans-serif-condensed"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:text="Seamus Cowden possede une ame de chef et une force physique impressionnante; il detient le record de vitesse et de force pour l'examen de qualification physique du SAS. Il prefere etre l'homme de pointe lors des operations, pret a creer un chemin pour ses coequipiers d'un coup de son marteau de demolition tactique,'Le Tronc'. "
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:typeface="normal"
+            tools:ignore="HardcodedText" />
+
+        <ImageButton
+            android:id="@+id/ctuBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignEnd="@+id/bioOp"
+            android:layout_below="@+id/textView9"
+            android:backgroundTint="@color/colorPrimary"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:srcCompat="@drawable/icone_ctu_5" />
+
+        <ImageView
+            android:id="@+id/yellowBar1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageSpeedDef"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/txtTypeOp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/imageTypeOp"
+            android:layout_toEndOf="@+id/textView7"
+            android:gravity="center"
+            android:text="Attaquant"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/imageTypeOp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/nomCodeOp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/ddn"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icone_attaquant" />
+
+        <ImageView
+            android:id="@+id/imageSpeedDef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTypeOp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/type_op_2_2" />
+
+        <ImageView
+            android:id="@+id/yellowBar2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/bioOp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/lblGadUnique"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/yellowBar2"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Gadget unique"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/imageGadgetUnique"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/lblGadUnique"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/gadget_unique_1" />
+
+        <TextView
+            android:id="@+id/txtGadUnique"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/imageGadgetUnique"
+            android:layout_centerHorizontal="true"
+            android:text="Le Tronc"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/descGadgetUnique"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/txtGadUnique"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:fontFamily="sans-serif-condensed"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:text="Marteau de démolition qui peut être utilisé pour traverser rapidement plusieurs murs, planchers et barricades destructibles. "
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:typeface="normal"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/yellowBar3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/descGadgetUnique"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/lblGadget"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/yellowBar3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Gadgets"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:ignore="HardcodedText,RtlCompat" />
+
+        <ImageView
+            android:id="@+id/imageGadget1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_below="@+id/lblGadget"
+            android:background="@drawable/border"
+            app:srcCompat="@drawable/gadget_2" />
+
+        <TextView
+            android:id="@+id/txtGadget1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageGadget1"
+            android:layout_below="@+id/imageGadget1"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Claymore"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imageGadget2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignEnd="@+id/imageOperateur"
+            android:layout_below="@+id/lblGadget"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/border"
+            app:srcCompat="@drawable/gadget_3" />
+
+        <TextView
+            android:id="@+id/txtGadget2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageGadget2"
+            android:layout_below="@+id/imageGadget2"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Charge Explosive"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/yellowBar4"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtGadget1"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/lblArmes"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/yellowBar4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Armes"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:ignore="HardcodedText,RtlCompat" />
+
+    </RelativeLayout>
+
+</ScrollView>

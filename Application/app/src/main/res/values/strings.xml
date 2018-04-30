@@ -15,6 +15,12 @@
     <string name="opsIcon">Icône d\'opérateur</string>
     <string name="ash">Ash</string>
     <string name="attaquant">Attaquants</string>
+    <string name="imageOpDesc">Image of the selected operator</string>
+    <string name="nomString">Nom réel:</string>
+    <string name="info_nom_complet">Nom complet</string>
+    <string name="info_date_de_naissance">Date de naissance</string>
+    <string name="info_biographie">Biographie</string>
+    <string name="info_ctu">CTU</string>
 
     <string-array name="att_array">
         <item>Ash</item>
