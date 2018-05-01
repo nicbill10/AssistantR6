@@ -63,7 +63,7 @@ public class OpsTypeFragment extends Fragment {
         List<String> defList = cOperateurs.getOpsListByType("Défenseur");
 
         listDataHeader.add("Attaquants");
-        listDataHeader.add("Defenseurs");
+        listDataHeader.add("Défenseurs");
 
         listDataChild.put(listDataHeader.get(0), attList);
         listDataChild.put(listDataHeader.get(1), defList);
