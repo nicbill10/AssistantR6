@@ -75,10 +75,12 @@ public class COperateurs extends DBHelper{
         }
         cursor.close();
 
+        closeDataBase();
         return hmInfoOp;
     }
 
     public List<String> getOpsListByType(String Type){
+        openDatabase();
         List<String> listOps = new ArrayList<>();
 
         Cursor cursor = mDatabase.rawQuery("select nomCode, ty.type, ct.abrevCTU from operateur as op join typeOperateur ty on op.idTypeOp = ty.idTypeOp join ctu as ct on op.idCTU = ct.idCTU where ty.Type = '" + Type + "' order by nomCode", null);
@@ -96,10 +98,12 @@ public class COperateurs extends DBHelper{
 
             cursor.close();
         }
+        closeDataBase();
         return listOps;
     }
 
     public List<String> getOpsListByCTU(String CTU){
+        openDatabase();
         List<String> listOps = new ArrayList<>();
 
         Cursor cursor = mDatabase.rawQuery("select nomCode from operateur as op join ctu as ct on op.idCTU = ct.idCTU where ct.abrevCTU = '" + CTU + "' order by nomCode", null);
@@ -117,6 +121,7 @@ public class COperateurs extends DBHelper{
 
             cursor.close();
         }
+        closeDataBase();
         return listOps;
     }
 

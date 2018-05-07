@@ -15,6 +15,7 @@ public class CCTU extends DBHelper {
     }
 
     public List<String> getCTUList(){
+        openDatabase();
         List<String> listCTU = new ArrayList<>();
 
         Cursor cursor = mDatabase.rawQuery("select abrevCTU from CTU as ct order by nomCTU", null);
@@ -32,6 +33,7 @@ public class CCTU extends DBHelper {
 
             cursor.close();
         }
+        closeDataBase();
         return listCTU;
     }
 }

@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:theme="@style/AppTheme.NoActionBar">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:isScrollContainer="true"
-        android:theme="@style/AppTheme.NoActionBar"
         tools:context="app.nicbill.assistantrainbowsixsiege.OpsInfosActivity">
 
 
@@ -22,7 +22,7 @@
             android:layout_alignEnd="@+id/textView9"
             android:layout_alignParentTop="true"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/icone_operateur_sledge"
+            app:srcCompat="@drawable/icone_operateur_sledge_min"
             tools:layout_editor_absoluteX="59dp"
             tools:layout_editor_absoluteY="148dp" />
 
@@ -49,7 +49,7 @@
             android:layout_toEndOf="@+id/nomReelOperateur"
             android:contentDescription="@string/imageOpDesc"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/image_operateur_sledge" />
+            app:srcCompat="@drawable/image_operateur_sledge_min" />
 
         <TextView
             android:id="@+id/textView5"
@@ -142,12 +142,10 @@
             android:id="@+id/bioOp"
             android:layout_width="300dp"
             android:layout_height="150dp"
-            android:layout_alignStart="@+id/ddn"
+            android:layout_alignEnd="@+id/imageGadget2"
             android:layout_below="@+id/textView8"
-            android:clickable="true"
             android:cursorVisible="false"
             android:ems="10"
-            android:focusable="true"
             android:focusableInTouchMode="false"
             android:fontFamily="sans-serif-condensed"
             android:overScrollMode="ifContentScrolls"
@@ -359,13 +357,196 @@
             android:layout_height="40dp"
             android:layout_below="@+id/yellowBar4"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="Armes"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"
             tools:ignore="HardcodedText,RtlCompat" />
+
+        <TextView
+            android:id="@+id/lblMainArmes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblArmes"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:text="Principales"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText,RtlCompat" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/btnArme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblMainArmes"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@android:color/darker_gray">
+
+            <ImageView
+                android:id="@+id/imageArme1"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/arme_35_min" />
+
+            <TextView
+                android:id="@+id/txtArme1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:text="M590A1"
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/btnArme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnArme1"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@android:color/darker_gray">
+
+            <ImageView
+                android:id="@+id/imageArme2"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/arme_1_min" />
+
+            <TextView
+                android:id="@+id/txtArme2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/btnArme3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnArme2"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@android:color/darker_gray">
+
+            <ImageView
+                android:id="@+id/imageArme3"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/arme_1_min" />
+
+            <TextView
+                android:id="@+id/txtArme3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblSideArmes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnArme3"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:text="Secondaires"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText,RtlCompat" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/btnSideArme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblSideArmes"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@android:color/darker_gray">
+
+            <ImageView
+                android:id="@+id/imageSideArme1"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/arme_60_min" />
+
+            <TextView
+                android:id="@+id/txtSideArme1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:text="P226 Mk 25"
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/btnSideArme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnSideArme1"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@android:color/darker_gray">
+
+            <ImageView
+                android:id="@+id/imageSideArme2"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/arme_75_min" />
+
+            <TextView
+                android:id="@+id/txtSideArme2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

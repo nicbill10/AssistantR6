@@ -9,6 +9,7 @@ import android.view.View.OnTouchListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -17,15 +18,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import app.nicbill.assistantrainbowsixsiege.SQLite.controller.CArme;
 import app.nicbill.assistantrainbowsixsiege.SQLite.controller.CGadget;
 import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Arme;
 
 public class OpsInfosActivity extends AppCompatActivity {
 
     String opName;
     COperateurs cOperateurs;
     CGadget cGadget;
+    CArme cArme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,13 @@ public class OpsInfosActivity extends AppCompatActivity {
         cOperateurs = new COperateurs(this);
         cGadget = new CGadget(this);
         opName = getIntent().getStringExtra("OP_NAME");
+        cArme = new CArme(this);
 
         PreparerView();
     }
 
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     private void PreparerView(){
-
         HashMap<String, String> hmOpsInfo = cOperateurs.getInfoOperateur(opName);
         HashMap<String, String> hmGadgets = cGadget.getOpGadgetList(opName);
 
@@ -52,6 +57,7 @@ public class OpsInfosActivity extends AppCompatActivity {
         ImageView imageGadgetUnique = findViewById(R.id.imageGadgetUnique);
         ImageView imageGadget1 = findViewById(R.id.imageGadget1);
         ImageView imageGadget2 = findViewById(R.id.imageGadget2);
+
         ImageButton btnIconCTU = findViewById(R.id.ctuBtn);
         TextView txtCodeOp = findViewById(R.id.nomCodeOp);
         TextView txtNomOp = findViewById(R.id.nomReelOperateur);
@@ -61,15 +67,22 @@ public class OpsInfosActivity extends AppCompatActivity {
         TextView txtGadgetUnique = findViewById(R.id.txtGadUnique);
         TextView txtGadget1 = findViewById(R.id.txtGadget1);
         TextView txtGadget2 = findViewById(R.id.txtGadget2);
+
         EditText txtBio = findViewById(R.id.bioOp);
         EditText descGadgetUnique = findViewById(R.id.descGadgetUnique);
         List<String> gadgetList = new ArrayList<>();
         List<String> qteGadgetList = new ArrayList<>();
 
+        //boucle for pour afficher les gadgets
         for (Map.Entry me : hmGadgets.entrySet()) {
             gadgetList.add(me.getKey().toString());
             qteGadgetList.add(me.getValue().toString());
         }
+
+        //boucle for pour afficher les armes
+        GenererListeArme();
+
+
 
         int imageOpID = this.getResources().getIdentifier("drawable/image_operateur_" + hmOpsInfo.get("nomCode").toLowerCase() + "_min", null, this.getPackageName());
         int iconOpID = this.getResources().getIdentifier("drawable/icone_operateur_" + hmOpsInfo.get("nomCode").toLowerCase() + "_min", null, this.getPackageName());
@@ -103,7 +116,7 @@ public class OpsInfosActivity extends AppCompatActivity {
                 break;
 
             case "Défenseur":
-                txtTypeOp.setText("Defenseur");
+                txtTypeOp.setText("Défenseur");
                 iconTypeID = this.getResources().getIdentifier("drawable/icone_defenseur", null, this.getPackageName());
                 break;
         }
@@ -136,5 +149,83 @@ public class OpsInfosActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void GenererListeArme(){
+        List<Arme> listArmesPrincipales = cArme.getOpWeaponsList(opName, "1");
+        List<Arme> listArmesSecondaires = cArme.getOpWeaponsList(opName, "0");
+        List<LinearLayout> listBtnArmesPrincipales = new ArrayList<>();
+        List<LinearLayout> listBtnArmesSecondaires = new ArrayList<>();
+        List<ImageView> listImageMainWeapons = new ArrayList<>();
+        List<ImageView> listImageSideWeapons = new ArrayList<>();
+        List<TextView> listTxtMainWeapons = new ArrayList<>();
+        List<TextView> listTxtSideWeapons = new ArrayList<>();
+
+        listImageMainWeapons.add((ImageView) findViewById(R.id.imageArme1));
+        listImageMainWeapons.add((ImageView) findViewById(R.id.imageArme2));
+        listImageMainWeapons.add((ImageView) findViewById(R.id.imageArme3));
+        listImageSideWeapons.add((ImageView) findViewById(R.id.imageSideArme1));
+        listImageSideWeapons.add((ImageView) findViewById(R.id.imageSideArme2));
+
+        listTxtMainWeapons.add((TextView) findViewById(R.id.txtArme1));
+        listTxtMainWeapons.add((TextView) findViewById(R.id.txtArme2));
+        listTxtMainWeapons.add((TextView) findViewById(R.id.txtArme3));
+        listTxtSideWeapons.add((TextView) findViewById(R.id.txtSideArme1));
+        listTxtSideWeapons.add((TextView) findViewById(R.id.txtSideArme2));
+
+        listBtnArmesPrincipales.add((LinearLayout) findViewById(R.id.btnArme1));
+        listBtnArmesPrincipales.add((LinearLayout) findViewById(R.id.btnArme2));
+        listBtnArmesPrincipales.add((LinearLayout) findViewById(R.id.btnArme3));
+        listBtnArmesSecondaires.add((LinearLayout) findViewById(R.id.btnSideArme1));
+        listBtnArmesSecondaires.add((LinearLayout) findViewById(R.id.btnSideArme2));
+
+        int i = 0;
+        for(Arme arme : listArmesPrincipales)
+        {
+            String nomArme = arme.getNomArme();
+            String idArme = arme.getIdArme();
+            int imageArmeID = this.getResources().getIdentifier("drawable/arme_" + idArme + "_min", null, this.getPackageName());
+            listImageMainWeapons.get(i).setImageResource(imageArmeID);
+            listTxtMainWeapons.get(i).setText(nomArme);
+            listBtnArmesPrincipales.get(i).setTag(idArme);
+            i++;
+        }
+        switch(listArmesPrincipales.size()){
+            case 1:     listBtnArmesPrincipales.get(0).setVisibility(View.VISIBLE);
+                listBtnArmesPrincipales.get(1).setVisibility(View.GONE);
+                listBtnArmesPrincipales.get(2).setVisibility(View.GONE);
+                break;
+
+            case 2:     listBtnArmesPrincipales.get(0).setVisibility(View.VISIBLE);
+                listBtnArmesPrincipales.get(1).setVisibility(View.VISIBLE);
+                listBtnArmesPrincipales.get(2).setVisibility(View.GONE);
+                break;
+
+            case 3:     listBtnArmesPrincipales.get(0).setVisibility(View.VISIBLE);
+                listBtnArmesPrincipales.get(1).setVisibility(View.VISIBLE);
+                listBtnArmesPrincipales.get(2).setVisibility(View.VISIBLE);
+                break;
+        }
+
+        i = 0;
+        for(Arme arme : listArmesSecondaires)
+        {
+            String nomArme = arme.getNomArme();
+            String idArme = arme.getIdArme();
+            int imageArmeID = this.getResources().getIdentifier("drawable/arme_" + idArme + "_min", null, this.getPackageName());
+            listImageSideWeapons.get(i).setImageResource(imageArmeID);
+            listTxtSideWeapons.get(i).setText(nomArme);
+            listBtnArmesSecondaires.get(i).setTag(idArme);
+            i++;
+        }
+        switch(listArmesSecondaires.size()){
+            case 1:     listBtnArmesSecondaires.get(0).setVisibility(View.VISIBLE);
+                listBtnArmesSecondaires.get(1).setVisibility(View.GONE);
+                break;
+
+            case 2:     listBtnArmesSecondaires.get(0).setVisibility(View.VISIBLE);
+                listBtnArmesSecondaires.get(1).setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

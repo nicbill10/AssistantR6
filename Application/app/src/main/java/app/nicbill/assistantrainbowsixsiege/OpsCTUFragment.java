@@ -2,8 +2,6 @@ package app.nicbill.assistantrainbowsixsiege;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,7 +18,7 @@ import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
 
 public class OpsCTUFragment extends Fragment{
 
-    ExpandableListAdapter listAdapter;
+    OpsExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -37,7 +35,7 @@ public class OpsCTUFragment extends Fragment{
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
+        listAdapter = new OpsExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);

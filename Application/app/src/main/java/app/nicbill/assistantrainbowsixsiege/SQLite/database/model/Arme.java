@@ -3,7 +3,7 @@ package app.nicbill.assistantrainbowsixsiege.SQLite.database.model;
 public class Arme {
     public static final String TABLE_NAME = "operateurs";
 
-    private int idArme;
+    private String idArme;
     private String nomArme;
     private String calibreBalle;
     private String magSize;
@@ -11,9 +11,10 @@ public class Arme {
     private String fireRate;
     private String mobility;
     private String cheminImageArme;
-    private int idTypeArme;
+    private String idTypeArme;
+    private String mainWeapon;
 
-    public Arme(int idArme, String nomArme, String calibreBalle, String magSize, String maxAmmo, String fireRate, String mobility, String cheminImageArme, int idTypeArme) {
+    public Arme(String idArme, String nomArme, String calibreBalle, String magSize, String maxAmmo, String fireRate, String mobility, String cheminImageArme, String idTypeArme, String mainWeapon) {
         this.idArme = idArme;
         this.nomArme = nomArme;
         this.calibreBalle = calibreBalle;
@@ -23,9 +24,10 @@ public class Arme {
         this.mobility = mobility;
         this.cheminImageArme = cheminImageArme;
         this.idTypeArme = idTypeArme;
+        this.mainWeapon = mainWeapon;
     }
 
-    public int getIdArme() {
+    public String getIdArme() {
         return idArme;
     }
 
@@ -77,12 +79,17 @@ public class Arme {
     public void setColumnCheminiconeop(String cheminImageArme) {
         this.cheminImageArme = cheminImageArme;
     }
-
-    public int getIdTypeArme(){
+    public String getIdTypeArme(){
         return idTypeArme;
     }
-    public void setColumnCheminimageop(int idTypeArme) {
+    public void setColumnCheminimageop(String idTypeArme) {
         this.idTypeArme = idTypeArme;
     }
 
+    public String getMainWeapon() {
+        return mainWeapon;
+    }
+    public void setMainWeapon(String mainWeapon) {
+        this.mainWeapon = mainWeapon;
+    }
 }

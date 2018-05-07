@@ -59,6 +59,7 @@ public class CGadget extends DBHelper{
                     }
         while (cursor.moveToNext());
 
+        closeDataBase();
         return idGadget;
     }
 }

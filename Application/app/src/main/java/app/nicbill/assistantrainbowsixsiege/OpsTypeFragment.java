@@ -17,7 +17,7 @@ import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
 
 public class OpsTypeFragment extends Fragment {
 
-    ExpandableListAdapter listAdapter;
+    OpsExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -33,7 +33,7 @@ public class OpsTypeFragment extends Fragment {
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
+        listAdapter = new OpsExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
