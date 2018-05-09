@@ -4,15 +4,15 @@ public class TypeArme {
 
     public static final String TABLE_NAME = "typeArme";
 
-    private int idTypeArme;
+    private String idTypeArme;
     private String nomType;
 
-    public TypeArme(int idTypeArme, String nomType) {
+    public TypeArme(String idTypeArme, String nomType) {
         this.idTypeArme = idTypeArme;
         this.nomType = nomType;
     }
 
-    public int getIdTypeArme(){
+    public String getIdTypeArme(){
         return idTypeArme;
     }
 

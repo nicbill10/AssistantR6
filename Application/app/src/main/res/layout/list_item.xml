@@ -27,7 +27,7 @@
         android:layout_marginStart="15dp"
         android:contentDescription="@string/opsIcon"
         android:scaleType="fitCenter"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@drawable/icone_operateur_ash_min_tn" />
 
     <TextView
         android:id="@+id/lbl_ops_list"

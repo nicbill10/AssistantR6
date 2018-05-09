@@ -1,12 +1,9 @@
-package app.nicbill.assistantrainbowsixsiege;
+package app.nicbill.assistantrainbowsixsiege.Weapons;
 import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +11,18 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import app.nicbill.assistantrainbowsixsiege.OpsTypeFragment;
 import app.nicbill.assistantrainbowsixsiege.R;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Arme;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.TypeArme;
 
-public class ArmesExpandableListAdapter extends BaseExpandableListAdapter {
+public class WeaponsExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Activity _context;
-    private List<String> _listDataHeader; // header titles
+    private List<TypeArme> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    private HashMap<TypeArme, List<Arme>> _listDataChild;
 
-    public ArmesExpandableListAdapter(Activity context, List<String> listDataHeader, HashMap<String, List<String>> listChildData, List<String> listIDArmes) {
+    public WeaponsExpandableListAdapter(Activity context, List<TypeArme> listDataHeader, HashMap<TypeArme, List<Arme>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -43,19 +41,19 @@ public class ArmesExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = (String) getChild(groupPosition, childPosition);
+        final Arme childArme = (Arme) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert infalInflater != null;
-            convertView = infalInflater.inflate(R.layout.list_item, null);
+            convertView = infalInflater.inflate(R.layout.list_item_weapon, null);
         }
 
-        TextView txtListChild = convertView.findViewById(R.id.lbl_ops_list);
-        ImageView iconListChild = convertView.findViewById(R.id.icon_ops_list);
+        TextView txtListChild = convertView.findViewById(R.id.lbl_weapon_list);
+        ImageView iconListChild = convertView.findViewById(R.id.icon_weapon_list);
 
-        int imageID = _context.getResources().getIdentifier("drawable/icone_operateur_" + childText.toLowerCase() + "_min_tn", null, _context.getPackageName());
-        txtListChild.setText(childText);
+        int imageID = _context.getResources().getIdentifier("drawable/arme_" + childArme.getIdArme() + "_min", null, _context.getPackageName());
+        txtListChild.setText(childArme.getNomArme());
         iconListChild.setImageResource(imageID);
         return convertView;
     }
@@ -82,15 +80,18 @@ public class ArmesExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        TypeArme headerTitle = (TypeArme) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_group, null);
+            convertView = infalInflater.inflate(R.layout.list_group_weapon, null);
         }
 
-        TextView lblListHeader = convertView.findViewById(R.id.lbl_type_ops);
-        lblListHeader.setText(headerTitle);
+        ImageView imageType = convertView.findViewById(R.id.imageTypeArme);
+        TextView lblListHeader = convertView.findViewById(R.id.lbl_weapon_group);
+        lblListHeader.setText(headerTitle.getNomType());
 
+        int imageID = _context.getResources().getIdentifier("drawable/type_arme_" + headerTitle.getIdTypeArme(), null, _context.getPackageName());
+        imageType.setImageResource(imageID);
         return convertView;
     }
 

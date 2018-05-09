@@ -21,5 +21,9 @@
     <string name="info_date_de_naissance">Date de naissance</string>
     <string name="info_biographie">Biographie</string>
     <string name="info_ctu">CTU</string>
+    <string name="weapons_ops">Par opérateur</string>
+    <string name="weapons_type">Par type</string>
+    <string name="title_activity_weapons">Armes</string>
+    <string name="fusil_d_assauts">Fusil d\'assauts</string>
 
 </resources>

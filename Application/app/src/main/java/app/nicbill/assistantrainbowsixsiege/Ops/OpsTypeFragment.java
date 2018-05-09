@@ -1,4 +1,4 @@
-package app.nicbill.assistantrainbowsixsiege;
+package app.nicbill.assistantrainbowsixsiege.Ops;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,14 +13,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import app.nicbill.assistantrainbowsixsiege.Ops.OpsExpandableListAdapter;
+import app.nicbill.assistantrainbowsixsiege.Ops.OpsInfosActivity;
+import app.nicbill.assistantrainbowsixsiege.R;
 import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Operateur;
 
 public class OpsTypeFragment extends Fragment {
 
     OpsExpandableListAdapter listAdapter;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    List<GroupItem> listDataHeader;
+    HashMap<GroupItem, List<Operateur>> listDataChild;
     COperateurs cOperateurs = new COperateurs(this.getContext());
 
     @Override
@@ -45,7 +49,7 @@ public class OpsTypeFragment extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
                 Intent i = new Intent(parent.getContext(),OpsInfosActivity.class);
-                i.putExtra("OP_NAME", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                i.putExtra("OP_NAME", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getNomCode());
                 startActivity(i);
                 return false;
             }
@@ -59,11 +63,11 @@ public class OpsTypeFragment extends Fragment {
     private void prepareListData() {
         listDataHeader = new ArrayList<>();
         listDataChild = new HashMap<>();
-        List<String> attList = cOperateurs.getOpsListByType("Attaquant");
-        List<String> defList = cOperateurs.getOpsListByType("Défenseur");
+        List<Operateur> attList = cOperateurs.getOpsListByType("Attaquant");
+        List<Operateur> defList = cOperateurs.getOpsListByType("Défenseur");
 
-        listDataHeader.add("Attaquants");
-        listDataHeader.add("Défenseurs");
+        listDataHeader.add(new GroupItem("att", "Attaquants"));
+        listDataHeader.add(new GroupItem("def", "Défenseurs"));
 
         listDataChild.put(listDataHeader.get(0), attList);
         listDataChild.put(listDataHeader.get(1), defList);

@@ -1,4 +1,4 @@
-package app.nicbill.assistantrainbowsixsiege;
+package app.nicbill.assistantrainbowsixsiege.Ops;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,15 +13,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import app.nicbill.assistantrainbowsixsiege.R;
 import app.nicbill.assistantrainbowsixsiege.SQLite.controller.CCTU;
 import app.nicbill.assistantrainbowsixsiege.SQLite.controller.COperateurs;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.CTU;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Operateur;
 
 public class OpsCTUFragment extends Fragment{
 
     OpsExpandableListAdapter listAdapter;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    List<GroupItem> listDataHeader;
+    HashMap<GroupItem, List<Operateur>> listDataChild;
     COperateurs cOperateurs = new COperateurs(getContext());
     CCTU cCTU = new CCTU(getContext());
 
@@ -46,7 +49,7 @@ public class OpsCTUFragment extends Fragment{
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
                 Intent i = new Intent(parent.getContext(),OpsInfosActivity.class);
-                i.putExtra("OP_NAME", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                i.putExtra("OP_NAME", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getNomCode());
                 startActivity(i);
                 return false;
             }
@@ -59,12 +62,12 @@ public class OpsCTUFragment extends Fragment{
         listDataHeader = new ArrayList<>();
         listDataChild = new HashMap<>();
 
-        List<String> listOps;
-        List<String> listCTU = cCTU.getCTUList();
+        List<Operateur> listOps;
+        List<CTU> listCTU = cCTU.getCTUList();
 
-        for(String ctu: listCTU) {
+        for(CTU ctu: listCTU) {
 
-            listDataHeader.add(ctu);
+            listDataHeader.add(new GroupItem(ctu.getIdCTU(), ctu.getAbrevCTU()));
             listOps = cOperateurs.getOpsListByCTU(ctu);
 
             listDataChild.put(listDataHeader.get(listDataHeader.size()-1), listOps);

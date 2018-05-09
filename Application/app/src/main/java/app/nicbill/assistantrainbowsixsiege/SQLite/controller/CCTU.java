@@ -8,26 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.CTU;
 
 public class CCTU extends DBHelper {
     public CCTU(Context context) {
         super(context);
     }
 
-    public List<String> getCTUList(){
+    public List<CTU> getCTUList(){
         openDatabase();
-        List<String> listCTU = new ArrayList<>();
+        List<CTU> listCTU = new ArrayList<>();
 
-        Cursor cursor = mDatabase.rawQuery("select abrevCTU from CTU as ct order by nomCTU", null);
+        Cursor cursor = mDatabase.rawQuery("select * from CTU order by nomCTU", null);
 
         Log.v("DICJ", "cursor.getCount() : " + cursor.getCount());
         if (cursor.getCount() > 0)
         {
             cursor.moveToFirst();
             do {
+                String idCTU = cursor.getString(cursor.getColumnIndex("idCTU"));
+                String nomCTU =cursor.getString(cursor.getColumnIndex("nomCTU"));
                 String abrevCTU = cursor.getString(cursor.getColumnIndex("abrevCTU"));
+                String locationCTU = cursor.getString(cursor.getColumnIndex("locationCTU"));
+                String descCTU = cursor.getString(cursor.getColumnIndex("descCTU"));
 
-                listCTU.add(abrevCTU);
+                listCTU.add(new CTU(idCTU, nomCTU, abrevCTU, locationCTU, descCTU));
             }
             while (cursor.moveToNext());
 

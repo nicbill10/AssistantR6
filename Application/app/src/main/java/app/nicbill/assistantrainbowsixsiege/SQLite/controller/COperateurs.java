@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.CTU;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Operateur;
 
 public class COperateurs extends DBHelper{
     public COperateurs(Context context) {
@@ -37,7 +39,7 @@ public class COperateurs extends DBHelper{
         if (cursor.getCount() > 0)
         {
             cursor.moveToFirst();
-            int idOperateur = cursor.getInt(cursor.getColumnIndex("idOperateur"));
+            String idOperateur = cursor.getString(cursor.getColumnIndex("idOperateur"));
             String nomOperateur = cursor.getString(cursor.getColumnIndex("nomOperateur"));
             String nomCode = cursor.getString(cursor.getColumnIndex("nomCode"));
             String bio = cursor.getString(cursor.getColumnIndex("bio"));
@@ -46,11 +48,11 @@ public class COperateurs extends DBHelper{
             String descCap = cursor.getString(cursor.getColumnIndex("descCap"));
             String cheminImageCap = cursor.getString(cursor.getColumnIndex("cheminImageCap"));
             String type = cursor.getString(cursor.getColumnIndex("type"));
-            int vitesse = cursor.getInt(cursor.getColumnIndex("vitesse"));
-            int armure = cursor.getInt(cursor.getColumnIndex("armure"));
+            String vitesse = cursor.getString(cursor.getColumnIndex("vitesse"));
+            String armure = cursor.getString(cursor.getColumnIndex("armure"));
             String nomRole = cursor.getString(cursor.getColumnIndex("nomRole"));
             String abrevCTU = cursor.getString(cursor.getColumnIndex("abrevCTU"));
-            int idCTU  = cursor.getInt(cursor.getColumnIndex("idCTU"));
+            String idCTU  = cursor.getString(cursor.getColumnIndex("idCTU"));
 
             Log.i("Assistant R6", nomOperateur + " nomOperateur");
             Log.i("Assistant R6", nomCap + " nomCap");
@@ -79,20 +81,23 @@ public class COperateurs extends DBHelper{
         return hmInfoOp;
     }
 
-    public List<String> getOpsListByType(String Type){
+    public List<Operateur> getOpsListByType(String Type){
         openDatabase();
-        List<String> listOps = new ArrayList<>();
+        List<Operateur> listOps = new ArrayList<>();
 
-        Cursor cursor = mDatabase.rawQuery("select nomCode, ty.type, ct.abrevCTU from operateur as op join typeOperateur ty on op.idTypeOp = ty.idTypeOp join ctu as ct on op.idCTU = ct.idCTU where ty.Type = '" + Type + "' order by nomCode", null);
+        Cursor cursor = mDatabase.rawQuery("select * from operateur as op join typeOperateur ty on op.idTypeOp = ty.idTypeOp join ctu as ct on op.idCTU = ct.idCTU where ty.Type = '" + Type + "' order by nomCode", null);
 
         Log.v("DICJ", "cursor.getCount() : " + cursor.getCount());
         if (cursor.getCount() > 0)
         {
             cursor.moveToFirst();
             do {
+                String idOperateur = cursor.getString(cursor.getColumnIndex("idOperateur"));
+                String nomOperateur = cursor.getString(cursor.getColumnIndex("nomOperateur"));
                 String nomCode = cursor.getString(cursor.getColumnIndex("nomCode"));
-
-                listOps.add(nomCode);
+                String bio = cursor.getString(cursor.getColumnIndex("bio"));
+                String ddn = cursor.getString(cursor.getColumnIndex("ddn"));
+                listOps.add(new Operateur(idOperateur, nomOperateur, nomCode, bio, ddn, null, null, 0, 0, 0, 0 ));
             }
             while (cursor.moveToNext());
 
@@ -102,20 +107,24 @@ public class COperateurs extends DBHelper{
         return listOps;
     }
 
-    public List<String> getOpsListByCTU(String CTU){
+    public List<Operateur> getOpsListByCTU(CTU ctu){
         openDatabase();
-        List<String> listOps = new ArrayList<>();
+        List<Operateur> listOps = new ArrayList<>();
 
-        Cursor cursor = mDatabase.rawQuery("select nomCode from operateur as op join ctu as ct on op.idCTU = ct.idCTU where ct.abrevCTU = '" + CTU + "' order by nomCode", null);
+        Cursor cursor = mDatabase.rawQuery("select * from operateur as op join ctu as ct on op.idCTU = ct.idCTU where ct.idCTU = '" + ctu.getIdCTU() + "' order by nomCode", null);
 
         Log.v("DICJ", "cursor.getCount() : " + cursor.getCount());
         if (cursor.getCount() > 0)
         {
             cursor.moveToFirst();
             do {
+                String idOperateur = cursor.getString(cursor.getColumnIndex("idOperateur"));
+                String nomOperateur = cursor.getString(cursor.getColumnIndex("nomOperateur"));
                 String nomCode = cursor.getString(cursor.getColumnIndex("nomCode"));
+                String bio = cursor.getString(cursor.getColumnIndex("bio"));
+                String ddn = cursor.getString(cursor.getColumnIndex("ddn"));
 
-                listOps.add(nomCode);
+                listOps.add(new Operateur(idOperateur, nomOperateur, nomCode, bio, ddn, null, null, 0, 0, 0, 0));
             }
             while (cursor.moveToNext());
 

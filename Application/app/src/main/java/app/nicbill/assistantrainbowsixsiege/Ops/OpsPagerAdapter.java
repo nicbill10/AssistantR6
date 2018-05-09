@@ -1,15 +1,17 @@
-package app.nicbill.assistantrainbowsixsiege;
+package app.nicbill.assistantrainbowsixsiege.Ops;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+import app.nicbill.assistantrainbowsixsiege.R;
+
+public class OpsPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context mContext;
 
-    public PagerAdapter(Context context, FragmentManager fm) {
+    public OpsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }

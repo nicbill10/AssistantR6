@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="app.nicbill.assistantrainbowsixsiege.OperatorsActivity">
+    tools:context="app.nicbill.assistantrainbowsixsiege.Ops.OperatorsListActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/ops_pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/ops_tabs"/>

@@ -4,13 +4,13 @@ public class CTU {
 
     public static final String TABLE_NAME = "ctu";
 
-    private int idCTU;
+    private String idCTU;
     private String nomCTU;
     private String abrevCTU;
     private String locationCTU;
     private String descCTU;
 
-    public CTU(int idCTU, String nomCTU, String abrevCTU, String locationCTU, String descCTU) {
+    public CTU(String idCTU, String nomCTU, String abrevCTU, String locationCTU, String descCTU) {
         this.idCTU = idCTU;
         this.nomCTU = nomCTU;
         this.abrevCTU = abrevCTU;
@@ -18,7 +18,7 @@ public class CTU {
         this.descCTU = descCTU;
     }
 
-    public int getIdCTU(){
+    public String getIdCTU(){
         return idCTU;
     }
 

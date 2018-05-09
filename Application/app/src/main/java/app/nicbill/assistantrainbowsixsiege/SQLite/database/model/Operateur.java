@@ -4,7 +4,7 @@ public class Operateur {
 
     public static final String TABLE_NAME = "operateurs";
 
-    private int idOperateur;
+    private String idOperateur;
     private String nomOperateur;
     private String nomCode;
     private String bio;
@@ -16,7 +16,7 @@ public class Operateur {
     private int idRole;
     private int idCTU;
 
-    public Operateur(int idOperateur, String nomOperateur, String nomCode, String bio, String ddn, String cheminIconeOp, String cheminImageOP,
+    public Operateur(String idOperateur, String nomOperateur, String nomCode, String bio, String ddn, String cheminIconeOp, String cheminImageOP,
                      int idCapacite, int idTypeOp, int idRole, int idCTU) {
         this.idOperateur = idOperateur;
         this.nomOperateur = nomOperateur;
@@ -31,7 +31,7 @@ public class Operateur {
         this.idCTU = idCTU;
     }
 
-    public int getIdOperateur() {
+    public String getIdOperateur() {
         return idOperateur;
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.nicbill.assistantrainbowsixsiege">
 
     <application
@@ -21,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OperatorsActivity"
+            android:name=".Ops.OperatorsListActivity"
             android:label="@string/title_activity_operators"
             android:parentActivityName=".MainMenuActivity"
             android:screenOrientation="portrait"
@@ -30,8 +31,35 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="app.nicbill.assistantrainbowsixsiege.MainMenuActivity" />
         </activity>
-        <activity android:name=".OpsInfosActivity" />
-        <activity android:name=".WeaponsListActivity"></activity>
+        <activity
+            android:name=".Ops.OpsInfosActivity"
+            android:parentActivityName=".Ops.OperatorsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.nicbill.assistantrainbowsixsiege.Ops.OperatorsListActivity" />
+        </activity>
+        <activity
+            android:name=".Weapons.WeaponsListActivity"
+            android:label="@string/title_activity_weapons"
+            android:parentActivityName=".MainMenuActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.nicbill.assistantrainbowsixsiege.MainMenuActivity" />
+        </activity>
+
+        <activity
+            android:name=".Weapons.WeaponsInfosActivity"
+            android:parentActivityName=".Weapons.WeaponsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.nicbill.assistantrainbowsixsiege.Weapons.WeaponsListActivity" />
+        </activity>
     </application>
 
 </manifest>
