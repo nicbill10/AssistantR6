@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.nicbill.assistantrainbowsixsiege.SQLite.DBHelper;
+import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Accessoire;
 import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.Arme;
 import app.nicbill.assistantrainbowsixsiege.SQLite.database.model.TypeArme;
 
@@ -152,5 +153,28 @@ public class CArme extends DBHelper{
         }
         closeDataBase();
         return listTypeArme;
+    }
+
+    public List<Accessoire> getAttachements(String idArme){
+
+        openDatabase();
+        List<Accessoire> listAttachements = new ArrayList<>();
+
+        Cursor cursor = mDatabase.rawQuery("select ac.idAccessoire, ac.nomAccessoire from accessoire ac join accessoireArme aa on ac.idAccessoire = aa.idAccessoire join arme ar on aa.idArme = ar.idArme where ar.idArme = '" + idArme + "'", null);
+
+        if (cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            do {
+            int idAccessoire = cursor.getInt(cursor.getColumnIndex("idAccessoire"));
+            String nomAccessoire = cursor.getString(cursor.getColumnIndex("nomAccessoire"));
+
+            listAttachements.add(new Accessoire(idAccessoire, nomAccessoire, null, 0));
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDataBase();
+        return listAttachements;
     }
 }

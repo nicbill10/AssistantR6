@@ -107,6 +107,29 @@ public class COperateurs extends DBHelper{
         return listOps;
     }
 
+    public List<Operateur> getOpsListByWeapon(String armeID){
+        openDatabase();
+        List<Operateur> listOps = new ArrayList<>();
+
+        Cursor cursor = mDatabase.rawQuery("select op.idOperateur, op.nomCode from operateur as op join armeOperateur ao on op.idOperateur = ao.idOperateur where ao.idArme = '" + armeID + "'", null);
+
+        Log.v("DICJ", "cursor.getCount() : " + cursor.getCount());
+        if (cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            do {
+                String idOperateur = cursor.getString(cursor.getColumnIndex("idOperateur"));
+                String nomCode = cursor.getString(cursor.getColumnIndex("nomCode"));
+                listOps.add(new Operateur(idOperateur, null, nomCode, null, null, null, null, 0, 0, 0, 0 ));
+            }
+            while (cursor.moveToNext());
+
+            cursor.close();
+        }
+        closeDataBase();
+        return listOps;
+    }
+
     public List<Operateur> getOpsListByCTU(CTU ctu){
         openDatabase();
         List<Operateur> listOps = new ArrayList<>();
